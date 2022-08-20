@@ -1,0 +1,16 @@
+{
+  "name": "spotify_radio",
+  "version": "1.0.0",
+  "description": "Spotify clone made with JavaScript **without frameworks**",
+  "main": "index.js",
+  "type": "module",
+  "engines": {
+    "node": "17"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
