@@ -75,7 +75,14 @@ describe('#Routes - test suite for api response', () => {
     expect(params.response.writeHead).not.toHaveBeenCalled();
   });
 
-  test.todo(`GET /unknown - given an inexistent route, it should respond with 404`);
+  test(`GET /unknown - given an inexistent route, it should respond with 404`, async () => {
+    const params = makeHandlerParams('POST', '/unknown');
+
+    await handler(...params.values());
+
+    expect(params.response.writeHead).toHaveBeenCalledWith(404);
+    expect(params.response.end).toHaveBeenCalled();
+  });
 
   describe('exceptions', () => {
     test.todo('given an inexistent file, it should respond with a 404');
