@@ -24,7 +24,7 @@ export default class TestUtil {
     });
   }
 
-  static defaultHandleParams(req, res) {
+  static defaultHandlerParams(req, res) {
     const requestStream = TestUtil.generateReadableStream(['request body']);
     const response = TestUtil.generateWritableStream(() => {});
 

@@ -17,9 +17,7 @@ describe('#Routes - test suite for api response', () => {
   });
 
   test('GET / - should redirect to home page', async () => {
-    const params = TestUtil.defaultHandleParams();
-    params.request.method = 'GET';
-    params.request.url = '/';
+    const params = makeHandlerParams();
 
     await handler(...params.values());
 
@@ -30,9 +28,7 @@ describe('#Routes - test suite for api response', () => {
   });
 
   test(`GET /home - should respond with ${homeHTML} a file stream`, async () => {
-    const params = TestUtil.defaultHandleParams();
-    params.request.method = 'GET';
-    params.request.url = '/home';
+    const params = makeHandlerParams('GET', '/home');
     const mockFileStream = makeMockFileStream();
 
     await handler(...params.values());
@@ -42,9 +38,7 @@ describe('#Routes - test suite for api response', () => {
   });
 
   test(`GET /controller - should respond with ${controllerHTML} a file stream`, async () => {
-    const params = TestUtil.defaultHandleParams();
-    params.request.method = 'GET';
-    params.request.url = '/controller';
+    const params = makeHandlerParams('GET', '/controller');
     const mockFileStream = makeMockFileStream();
 
     await handler(...params.values());
@@ -72,4 +66,11 @@ function makeMockFileStream() {
   jest.spyOn(mockFileStream, 'pipe').mockReturnValue();
 
   return mockFileStream;
+}
+
+function makeHandlerParams(method = 'GET', url = '/') {
+  const params = TestUtil.defaultHandlerParams();
+  params.request.method = method;
+  params.request.url = url;
+  return params;
 }
