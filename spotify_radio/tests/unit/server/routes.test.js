@@ -62,6 +62,19 @@ describe('#Routes - test suite for api response', () => {
     });
   });
 
+  test(`GET /file.ext - should respond with a file stream`, async () => {
+    const fileName = '/image.png';
+    const params = makeHandlerParams('GET', fileName);
+    const expectedType = '';
+    const mockFileStream = makeMockFileStream(expectedType);
+
+    await handler(...params.values());
+
+    expect(Controller.prototype.getFileStream).toBeCalledWith(fileName);
+    expect(mockFileStream.pipe).toHaveBeenCalledWith(params.response);
+    expect(params.response.writeHead).not.toHaveBeenCalled();
+  });
+
   test.todo(`GET /unknown - given an inexistent route, it should respond with 404`);
 
   describe('exceptions', () => {
