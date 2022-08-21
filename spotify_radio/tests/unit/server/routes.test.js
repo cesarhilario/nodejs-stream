@@ -96,7 +96,18 @@ describe('#Routes - test suite for api response', () => {
       expect(params.response.writeHead).toHaveBeenCalledWith(404);
       expect(params.response.end).toHaveBeenCalled();
     });
-    test.todo('given an error file, it should respond with 500');
+
+    test('given an error file, it should respond with 500', async () => {
+      const params = makeHandlerParams('GET', '/index.png');
+
+      jest
+        .spyOn(Controller.prototype, Controller.prototype.getFileStream.name)
+        .mockRejectedValue(new Error('Error: '));
+
+      await handler(...params.values());
+      expect(params.response.writeHead).toHaveBeenCalledWith(500);
+      expect(params.response.end).toHaveBeenCalled();
+    });
   });
 });
 
