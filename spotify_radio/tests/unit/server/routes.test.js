@@ -76,7 +76,7 @@ describe('#Routes - test suite for api response', () => {
   });
 
   test(`GET /unknown - given an inexistent route, it should respond with 404`, async () => {
-    const params = makeHandlerParams('POST', '/unknown');
+    const params = makeHandlerParams('GET', '/unknown');
 
     await handler(...params.values());
 
